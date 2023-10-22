@@ -1,0 +1,9 @@
+package DeadLock;
+
+public class DeadLock1 extends Thread {
+	A a = new A();
+	B b = new B();
+	
+	
+	
+}

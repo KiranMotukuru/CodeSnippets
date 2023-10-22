@@ -1,0 +1,73 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.log4j.Logger;
+import org.apache.log4j.SimpleLayout;
+import org.apache.log4j.ConsoleAppender r
+
+public class Jdbc {
+	private static Logger logger = Logger.getLogger(Jdbc.class.getName());
+	static {
+	//tayout object
+	SimpleLayout layout=new SimpleLayout();
+	//Appender object
+	ConsoleAppender appender=new ConsoleAppender(layout);
+	//add Appender object to logger object
+	logger.addAppender(appender);
+
+	 
+
+	 
+
+	// Specify the logger level to retrieve the log messages
+	logger.setLevelLevel.DEBUG);
+	}
+
+	public static void main(String[] args) {
+
+		try {
+			Connection connection = extracted();
+
+			PreparedStatement prepareStatement = connection.prepareStatement("selecZt * from std");
+			ResultSet resultset = prepareStatement.executeQuery();
+
+			ResultSetMetaData metaData = resultset.getMetaData();
+			int columnCount = metaData.getColumnCount();
+
+			for (int i = 1; i <= columnCount; i++) {
+				System.out.print(metaData.getColumnName(i) + "\t");
+			}
+
+			while (resultset.next()) {
+				System.out.print(resultset.getString(1));
+				System.out.print(resultset.getString(2));
+				System.out.print(resultset.getString(3));
+				System.out.println();
+
+				System.out.println("Hello");
+
+				// Logging at different levels
+				logger.finest("FINEST (TRACE): Very detailed, fine-grained debugging information");
+				logger.finer("FINER (DEBUG): Detailed debugging information");
+				logger.fine("FINE (INFO): General information about the application's execution");
+			}
+		} catch (SQLException e) {
+			// Log a SEVERE message for the exception
+			logger.log(Level.SEVERE, "An SQL exception occurred", e);
+		} catch (Exception e) {
+			// Log a SEVERE message for the exception
+			logger.log(Level.SEVERE, "UNKWON ERROR OCCURED", e);
+		}
+	}
+
+	private static Connection extracted() throws SQLException {
+		logger.finer("Connection established.............................................................");
+		return DriverManager.getConnection(Constants.URL, Constants.USER, Constants.PASSWORD);
+	}
+}

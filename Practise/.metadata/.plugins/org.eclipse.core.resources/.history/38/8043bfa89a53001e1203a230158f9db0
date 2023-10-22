@@ -1,0 +1,11 @@
+
+public abstract class D {
+	
+	
+	void m1() {
+		System.out.println("dhv");
+	}
+	
+  abstract  void M4();
+
+}

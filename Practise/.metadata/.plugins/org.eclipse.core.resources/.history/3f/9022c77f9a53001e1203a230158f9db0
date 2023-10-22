@@ -1,0 +1,18 @@
+
+public class E  extends D{
+	
+	
+	public static void main(String[] args) {
+		
+		E obj = new E;
+		obj.M4();
+		
+	}
+
+	@Override
+	void M4() {
+	System.out.println("methdbvb");
+		
+	}
+
+}

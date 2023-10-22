@@ -1,0 +1,140 @@
+
+/*
+ * import java.sql.*;
+ * 
+ * public class JdbcNewClass {
+ * 
+ * public static void main(String[] args)
+ * 
+ * {
+ * 
+ * Connection connection; try { connection =
+ * DriverManager.getConnection(Constants.URL, Constants.USER,
+ * Constants.PASSWORD);
+ * 
+ * Statement createStatement = connection.createStatement(); String query =
+ * "select * from empl"; ResultSet resultset =
+ * createStatement.executeQuery(query);
+ * 
+ * while (resultset.next()) { System.out.println( resultset.getString(1) + "\t"
+ * + resultset.getString(2) + " 	\t" + resultset.getString(3)); // getString
+ * //getInt //getDouble } }
+ * 
+ * catch (SQLException e) { // TODO Auto-generated catch block
+ * e.printStackTrace(); }
+ * 
+ * } }
+ */import java.sql.*;
+import java.util.Scanner;
+
+class JdbcNewClass {
+
+	static int id;
+	static String name;
+	static int marks;
+	static Scanner sc = new Scanner(System.in);
+
+	// main
+	public static void main(String[] args) throws SQLException {
+		Connection con = null;
+		Statement stmt = null;
+		try {
+			con = getConnection();
+			stmt = getStatement(con);
+
+			preparedStatemnt(con);
+		}
+
+		catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			stmt.close();
+			con.close();
+		}
+
+	}
+
+	private static void preparedStatemnt(Connection con) throws SQLException {
+		PreparedStatement preparedStatement1 = con.prepareStatement("select * from std ");
+//			preparedStatement1.setInt(1, 123);
+//			preparedStatement1.setString(2, "Up");
+
+		ResultSet resultSet = preparedStatement1.executeQuery();
+		ResultSetMetaData metaData = resultSet.getMetaData();
+		int columnCount = metaData.getColumnCount();
+
+		for (int i = 1; i <= columnCount; i++) {
+			System.out.print(metaData.getColumnName(i) + "\t");
+		}
+
+		System.out.println();
+		while (resultSet.next()) {
+			System.out.print(resultSet.getString(1) + "\t");
+			System.out.print(resultSet.getString(2) + "\t");
+			System.out.print(resultSet.getString(3) + "\t");
+			System.out.println();
+		}
+	}
+
+	private static void selectQuery(Statement stmt) throws SQLException {
+		ResultSet resultset = stmt.executeQuery("select * from std");
+
+		while (resultset.next()) {
+			System.out.println(
+					resultset.getString(1) + "\t" + resultset.getString(2) + " 	\t" + resultset.getString(3));
+			// getString //getInt //getDouble
+		}
+	}
+
+	private static void deleteRow(Statement stmt) throws SQLException {
+		System.out.println("Please enter id for which data to be deleted");
+		id = sc.nextInt();
+		String sql = "delete from std where id=" + id;
+		int noOfRows = stmt.executeUpdate(sql);
+		System.out.println(noOfRows);
+	}
+
+	private static void updateARow(Statement stmt) throws SQLException {
+		System.out.println("Please enter id for which data to be updated");
+		id = sc.nextInt();
+		System.out.println("Please enter new name");
+		name = sc.next();
+		System.out.println("Please enter updated mar");
+		marks = sc.nextInt();
+
+		// String sql = "update emp set name=" + "'" + name + "'where id=" + id;//
+		String sql = "update std set marks=" + "'" + marks + "'where id=" + id;
+		int noOfRows = stmt.executeUpdate(sql);
+		System.out.println(noOfRows);
+	}
+
+	private static void insertNewRow(Statement stmt) throws SQLException {
+		runTimeData();
+
+		String insertQuery = "insert into std values(" + id + " ," + "'" + name + "'," + marks + ")";
+		System.out.println(insertQuery);
+		int noOfRows = stmt.executeUpdate(insertQuery);
+		System.out.println(noOfRows);
+	}
+
+	private static void runTimeData() {
+		System.out.println("Please enter id");
+		id = sc.nextInt();
+		System.out.println("Please enter name");
+		name = sc.next();
+		System.out.println("Please enter marks");
+		marks = sc.nextInt();
+	}
+
+	private static Statement getStatement(Connection con) throws SQLException {
+		return con.createStatement();
+	}
+
+	private static Connection getConnection() throws SQLException {
+		Connection con = DriverManager.getConnection(Constants.URL, Constants.USER, Constants.PASSWORD);
+		return con;
+	}
+	
+	
+
+}

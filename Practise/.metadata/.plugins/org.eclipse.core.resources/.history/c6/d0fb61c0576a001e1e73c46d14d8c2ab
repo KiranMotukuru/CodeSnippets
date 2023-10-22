@@ -1,0 +1,19 @@
+//Internal thread Communication
+public class ThreadA {
+
+	public static void main(String[] args) throws InterruptedException {
+		// child
+		ThreadB b = new ThreadB();
+		b.start();
+		System.out.println(b.total);
+
+		synchronized (b) {
+			System.out.println("1  Main  thread Call wait Method");
+			b.wait();
+			System.out.println("4 main thread got Notifiaction");
+			System.out.println(b.total);
+		}
+
+	}
+
+}

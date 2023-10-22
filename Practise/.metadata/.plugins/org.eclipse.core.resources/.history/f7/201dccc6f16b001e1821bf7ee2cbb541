@@ -1,0 +1,41 @@
+package DeadLock;
+
+public class A {
+
+	public synchronized void d1(B b) {
+		System.out.println("Thraed 1 Starts execution od D1()");
+
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			System.out.println("Thraed 1 trying to Call Bs lAST MEHTOD");
+			b.last();
+		}
+
+	}
+
+	public synchronized void last() {
+		System.out.println("Inside A This is Last Method");
+	}
+
+}
+
+class B {
+
+	public synchronized void d2(A a) {
+		System.out.println("Thraed 2 Starts execution of D2()");
+
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			System.out.println("Thraed 2 trying to Call A's lAST MEHTOD");
+			a.last();
+		}
+
+	}
+
+	public synchronized void last() {
+		System.out.println("Inside B This is Last Method");
+	}
+
+}

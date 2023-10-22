@@ -1,0 +1,28 @@
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
+public class HelloWorldWithLogging {
+    public static void main(String[] args) {
+        // Create a logger for our program
+        Logger logger = Logger.getLogger("HelloWorldLogger");
+
+        // Create a console handler to display log messages on the screen
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+
+        // Set the logging level to INFO, which means we'll log informational messages
+        logger.setLevel(Level.INFO);
+        consoleHandler.setLevel(Level.INFO);
+
+        // Create a simple formatter to format log messages
+        SimpleFormatter formatter = new SimpleFormatter();
+        consoleHandler.setFormatter(formatter);
+
+        // Add the console handler to the logger
+        logger.addHandler(consoleHandler);
+
+        // Log the "Hello, World!" message
+        logger.info("Hello, World!");
+    }
+}

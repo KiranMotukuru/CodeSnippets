@@ -1,0 +1,5 @@
+package DeadLock;
+
+public sealed class B {
+
+}

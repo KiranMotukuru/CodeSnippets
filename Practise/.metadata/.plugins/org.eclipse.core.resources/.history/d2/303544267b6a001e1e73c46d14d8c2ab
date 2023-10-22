@@ -1,0 +1,42 @@
+//Internal thread Communication
+public class ThreadA {
+
+	public static void main(String[] args) throws InterruptedException {
+		// child
+		ThreadB b = new ThreadB();
+		b.start();
+
+		synchronized (b) {
+			System.out.println(Thread.currentThread().getName() + " ...thread Call wait Method");
+			b.wait(1);
+			System.out.println(" main thread got Notifiaction");
+			System.out.println(b.total);
+		}
+
+	}
+
+}
+
+
+ class ThreadB extends Thread {
+
+	int total = 0;
+
+	@Override
+	public void run() {
+		Thread.currentThread().setName("Child ");
+
+		synchronized (this) {
+			System.out.println(Thread.currentThread().getName() +
+					" .... >  Thread Starts Calcualtion");
+
+			for (int i = 0; i <= 100; i++) {
+				total = total + i;
+			}
+			System.out.println(Thread.currentThread().getName() + ".... >"
+					+ "   Thread giving Notifcation");
+			this.notify();
+		}
+
+	}
+}

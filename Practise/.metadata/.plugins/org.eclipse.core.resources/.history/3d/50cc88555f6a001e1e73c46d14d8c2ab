@@ -1,0 +1,25 @@
+public class DebugExample {
+
+	public static void main(String[] args) {
+		int a = 10;
+		int b = 7;
+
+		int result = addNumbers(a, b);
+
+		System.out.println("The result is: " + result);
+
+	}
+
+	public static int firstNumber(int a) {
+
+		return a;
+	}
+
+	// method2
+	public static int addNumbers(int x, int y) {
+		// Set a breakpoint here to debug this method
+		int sum = firstNumber(x) + y;
+		return sum;
+	}
+
+}

@@ -1,0 +1,7 @@
+public class DebugExample3 {
+
+	public static int secondNumber(int b) {
+		return b;
+	}
+
+}

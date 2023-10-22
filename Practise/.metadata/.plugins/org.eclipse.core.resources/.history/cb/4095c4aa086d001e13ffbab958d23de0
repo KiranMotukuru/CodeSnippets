@@ -1,0 +1,89 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+
+public class PrepareStatements {
+
+	public static void main(String[] args) {
+
+		try {
+			Connection connection = getConnection();   
+			
+		  insertMethod(connection);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private static void deleteMethod(Connection connection) throws SQLException {
+		String query = "delete from std where id = ?";
+
+		
+		PreparedStatement prepareStatement = connection.prepareStatement(query);
+		prepareStatement.setInt(1, 4);
+		int executeUpdate = prepareStatement.executeUpdate();
+		System.out.println(" rows Effected " + executeUpdate);
+	}
+
+	private static void updateMethod(Connection connection) throws SQLException {
+		String query =  "update std set name = ? where id = ?";
+		PreparedStatement prepareStatement = connection.prepareStatement(query);
+		prepareStatement.setString(1, "dvdnbjfb");
+		prepareStatement.setInt(2, 3);
+		int executeUpdate = prepareStatement.executeUpdate();
+		System.out.println(" rows Effected " + executeUpdate);
+	}
+
+	private static void insertMethod(Connection connection) throws SQLException {
+		String query = "insert into std values(?,?,?)";
+		
+		
+		PreparedStatement prepareStatement = connection.prepareStatement(query);
+
+		prepareStatement.setInt(1, 1);
+		prepareStatement.setString(2, "Anusha");
+		prepareStatement.setInt(3, 60);
+		int executeUpdate = prepareStatement.executeUpdate();
+		System.out.println(" rows Effected " + executeUpdate);
+	}
+
+	private static void PreparedStatement() throws SQLException {
+		Connection connection = getConnection();
+
+		PreparedStatement prepareStatement = extracted(connection);
+		ResultSet rs = prepareStatement.executeQuery();
+		ResultSetMetaData metaData = rs.getMetaData();
+
+		int columnCount = metaData.getColumnCount();
+
+		for (int i = 1; i <= columnCount; i++) {
+			System.out.print(metaData.getColumnName(i) + "\t");
+
+		}
+		System.out.println();
+
+		while (rs.next()) {
+			System.out.print(rs.getString(1) + "\t");
+			System.out.print(rs.getString(2) + "\t");
+			System.out.print(rs.getString(3) + "\t");
+			System.out.println();
+
+		}
+	}
+
+	private static PreparedStatement extracted(Connection connection) throws SQLException {
+		PreparedStatement prepareStatement = connection.prepareStatement("select * from std");
+		return prepareStatement;
+	}
+
+	private static Connection getConnection() throws SQLException {
+		Connection connection = DriverManager.getConnection(Constants.URL, Constants.USER, Constants.PASSWORD);
+		return connection;
+	}
+
+}

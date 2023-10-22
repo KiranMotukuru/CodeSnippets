@@ -1,0 +1,10 @@
+INDEX VERSION 1.131+E:\ECLIPSECODES\Practise\.metadata\.plugins\org.eclipse.jdt.core
+2178751970.index
+173591996.index
+1865797976.index
+3722472998.index
+3501433025.index
+1940955397.index
+2185054973.index
+3825518477.index
+3503352140.index

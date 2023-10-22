@@ -1,0 +1,19 @@
+public class DebugExample2 {
+
+	
+
+	public static int uduibfibfiuo(int a) {
+		return a + 1;
+	}
+
+	public static int secondNumber(int b) {
+		return b;
+	}
+
+	// method2
+	public static int addNumbers(int x, int y) {
+		int sum = uduibfibfiuo(x) + secondNumber(y);
+		return sum;
+	}
+
+}

@@ -1,0 +1,45 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+
+public class Jdbc {
+
+	public static void main(String[] args) {
+
+		try {
+			Connection connection = extracted();
+			PreparedStatement prepareStatement = connection.prepareStatement("select * from std");
+			ResultSet resultset = prepareStatement.executeQuery();
+
+			ResultSetMetaData metaData = resultset.getMetaData();
+			int columnCount = metaData.getColumnCount();
+
+			for (int i = 1; i <= columnCount; i++) {
+				System.out.print(metaData.getColumnName(i) + "\t");
+
+			}
+			while (resultset.next()) {
+				System.out.print(resultset.getString(1) );
+				System.out.print(resultset.getString(2) );
+				System.out.print(resultset.getString(3) );
+				System.out.println();
+
+				System.out.println("Helo");
+
+			}
+		}
+
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private static Connection extracted() throws SQLException {
+		return DriverManager.getConnection(Constants.URL, Constants.USER, Constants.PASSWORD);
+	}
+}

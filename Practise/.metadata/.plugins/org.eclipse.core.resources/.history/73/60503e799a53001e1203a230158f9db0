@@ -1,0 +1,10 @@
+
+public class E  extends D{
+
+	@Override
+	void M4() {
+	System.out.println("methdbvb");
+		
+	}
+
+}

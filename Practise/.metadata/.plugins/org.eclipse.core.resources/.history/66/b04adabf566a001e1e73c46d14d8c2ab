@@ -1,0 +1,20 @@
+
+public class ThreadB extends Thread {
+
+	int total = 0;
+
+	@Override
+	public void run() {
+
+		synchronized (this) {
+			System.out.println("Child  Thread Starts Calcualtion");
+
+			for (int i = 1; i < 100; i++) {
+				total = total + i;
+			}
+			System.out.println(" Child  Thread giving Notifcation");
+			this.notify();
+		}
+
+	}
+}

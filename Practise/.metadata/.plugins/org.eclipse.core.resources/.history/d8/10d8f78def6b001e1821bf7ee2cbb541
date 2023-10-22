@@ -1,0 +1,14 @@
+package DeadLock;
+
+public class DeadLock extends Thread {
+
+	public static void main(String[] args) {
+		A a = new A();
+		B b = new B();
+
+		public void m1(){
+			
+		}
+	}
+
+}

@@ -1,0 +1,21 @@
+public class DebugExample {
+
+    public static void main(String[] args) {
+        int a = 5;
+        int b = 7;
+        
+        System.out.println("Starting the program");
+        
+        int result = addNumbers(a, b);
+        
+        System.out.println("The result is: " + result);
+        
+        System.out.println("Program finished");
+    }
+
+    public static int addNumbers(int x, int y) {
+        // Set a breakpoint here to debug this method
+        int sum = x + y;
+        return sum;
+    }
+}

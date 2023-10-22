@@ -1,0 +1,10 @@
+package DeadLock;
+
+  class DeadLock {
+
+	public  synchronized void last() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
