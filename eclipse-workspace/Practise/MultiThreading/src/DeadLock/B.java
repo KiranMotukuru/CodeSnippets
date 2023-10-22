@@ -1,0 +1,24 @@
+package DeadLock;
+
+public class B {
+
+	public synchronized void d2(A a) {
+		Thread.currentThread().setName("Child");
+
+		System.out.println(Thread.currentThread().getName() + " Starts execution of D2()");
+
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+
+		}
+		System.out.println(Thread.currentThread().getName() + "  trying to Call A's lAST MEHTOD");
+		a.last();
+
+	}
+
+	public synchronized void last() {
+		System.out.println("Inside B This is Last Method");
+	}
+
+}
