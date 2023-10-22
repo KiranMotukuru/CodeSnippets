@@ -1,8 +1,7 @@
 
 public class B {
 	public static void main(String[] args) {
-		System.out.println("Added premium");
-		
+		System.out.println("Added Functionality");
 
 	}
 
